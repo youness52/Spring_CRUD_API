@@ -52,7 +52,7 @@ public class JwtUtil {
         String name = claims.get("name", String.class);
     
         // Create and return UserInfo object
-        return new User(userId,name,username);
+        return new User(userId,name,username,"");
     }
 
     public boolean validateToken(String token) {
