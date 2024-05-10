@@ -5,7 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.demo.auth.JwtUtil;
+
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/users")
@@ -13,6 +16,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
@@ -34,6 +40,15 @@ public class UserController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+
+    @GetMapping("/me")
+    public ResponseEntity<?> getUserInfo(@RequestHeader("Authorization") String authorizationHeader) {
+        
+            User userinfo = jwtUtil.extractUserinfo(authorizationHeader.substring(7));
+            return ResponseEntity.ok(userinfo);
+        
     }
 
     @PutMapping("/{id}")
