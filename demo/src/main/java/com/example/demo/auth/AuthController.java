@@ -39,7 +39,7 @@ public class AuthController {
             }
         } else {
 
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed: Incorrect email "+authenticationManager.hashCode());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed: Incorrect Email "+authenticationManager.hashCode());
         }
     }
 

@@ -3,6 +3,8 @@ package com.example.demo.auth;
 import java.util.Date;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.users.User;
@@ -14,7 +16,9 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtUtil {
 
-    private String SECRET_KEY = "p47FiaxMEi0j6xePfXDQFI4bIFiEFP6S7865RciaNtE"; // Change this to a secure secret key
+    @Value("${jwt.secret-key}")
+    private String SECRET_KEY="p47FiaxMEi0j6xePfXDQFI4bIFiEFP6S7865RciaNtE";
+
     private final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS256;
     //Convert the secret key string to a SecretKey object
     private final SecretKey secretKey = new SecretKeySpec(SECRET_KEY.getBytes(), SIGNATURE_ALGORITHM.getJcaName());
